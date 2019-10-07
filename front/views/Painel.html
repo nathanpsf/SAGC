@@ -1,0 +1,46 @@
+<div class="container" id="blocoOcorrencias">
+    <div class="container formMainPage" id="formOcorrencias">
+      <p style="color:white;font-size:1.5em;">Fichas requisitadas:</p> 
+      <ul class="list-group">
+          <li class="list-group-item" ng-repeat="f in fichas"><a href ng-click="abrirFicha(f)">Ficha ({{f}})</a></li>
+          <li class="list-group-item" ng-show="!fichas.length">Nenhuma requisição no momento</li>
+      </ul> 
+    <h1 class="blocoTitulo" id="blocoOcorrenciasTitulo">Ocorrências:</h1>
+    <form id="formFirstBlock">
+      <div class="form-row align-items-center">
+        <div class="col-sm-3 my-1">
+          <label class="sr-only" for="inlineFormInputName">Name</label>
+          <input type="search" ng-model="q" class="form-control" id="inlineFormInputName" placeholder="Digte o nome da cidade">
+        </div>
+        
+        <div class="col-auto my-1">
+            <button class="btn btn-light" type="submit" ng-click="filtrarCidade()">Buscar</button>
+            <button class="btn btn-light" type="submit" ng-click="irOcorrencia()">Cadastrar Ocorrencia</button>
+        </div>
+      </div>
+    </form>
+    </div>
+    
+    <div class="container tabelaMainPage" id="tableOcorrencias">
+    <table class="tabelas table table-hover table-responsive w-auto">
+      <thead>
+        <tr class="tableHead">
+          <th scope="col">#</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Endereço</th>
+          <th scope="col">Tipo</th>	
+          <th scope="col">Observação</th>	          
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-info" ng-repeat="o in ocorrencias track by $index" ng-show="o.cidade == cidade || cidade == ''">
+          <th scope="row">{{o.id}}</th>
+          <td>{{o.cidade}}</td>
+          <td>{{o.endereco}}</td>
+          <td>{{o.tipo}}</td>
+          <td>{{o.obs}}</td>       
+        </tr>
+      </tbody>
+    </table>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+body{
+	margin:0;
+	padding:0;
+  background:url('https://static.tumblr.com/03fbbc566b081016810402488936fbae/pqpk3dn/MRSmlzpj3/tumblr_static_bg3.png') repeat 0 0;
+  background-size: 700px 700px;
+  
+  
+  
+  /*animacao para diferentes browsers*/
+	-webkit-animation: 10s linear 0s normal none infinite animate;
+	-moz-animation: 10s linear 0s normal none infinite animate;
+	-ms-animation: 10s linear 0s normal none infinite animate;
+	-o-animation: 10s linear 0s normal none infinite animate;
+	animation: 10s linear 0s normal none infinite animate;
+ 
+}
+ 
+@-webkit-keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 1700px 1000px;}
+}
+
+ 
+@-moz-keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 600px 0;}
+}
+ 
+@-ms-keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 400px 0;}
+}
+ 
+@-o-keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 100px 0;}
+}
+ 
+@keyframes animate {
+	from {background-position:0 0;}
+	to {background-position: 900px 0;}
+}
+
+
+
+#homepageTitulo {
+	font-family: 'Open Sans';
+	text-align: center;
+	position: relative;
+	top: 25%;
+	right: 0;
+	left: 0;
+}
+#formCriarPergunta {
+	padding-top:12%;
+}
+
+#tituloPrincipal {
+  color:white;
+	text-align: center;
+	padding-top: 15%;
+}
+#imageGrid {
+  color:white;
+	text-align: center;
+	padding-top: 12%;
+}
+
+html {
+	height: 100%;
+}
+hr {
+	width: 700px;
+	border-top: 1px solid #f8f8f8;
+	border-bottom: 2px solid rgba(0,0,0,0.2);
+}
+
+
+
+.textoFoot {
+  color: #e3f2fd;
+  font-family: Lato;
+  font-size: 20px;
+  text-align: center;
+  margin-top:10px;
+}
+
+.tabelaMainPage{
+	padding-top: 1%;
+}
+
+
+#formOcorrencias{
+	padding-top:12%;
+}
+
+#formFichas{
+	padding-top:2%;
+}
+.tableHead{
+	background:black;
+	color:white;
+}
+
+ul.dropdown-lr {
+  width: 300px;
+}
+
+.blocoTitulo{
+	color:white;
+	font-family: 'Open Sans';
+	text-align: left;
+	position: relative;
+	font-size:30px;
+	padding-bottom:2%;
+}
+
+.btn:hover {
+  background-color: white;
+}
+
+.btn{
+  background-color:#d9edf7;
+}
+
+.formCadastrarOcorrencia{
+	padding: 3% 3% 3% 3%;
+	background-color:#e3f2fd;
+}

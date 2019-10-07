@@ -1,0 +1,37 @@
+<div class="container">
+        <div class="container" id="formOcorrencias">
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1>Tela análise de requisições</h1>
+                  <form>
+                    <div class="form-group">
+                        <label for="tipo">Selecione o e-mail do Usuário:</label>
+                        <select class="form-control" id="tipo" ng-model="uselect" ng-change="consultarResp()">
+                        <option ng-repeat="u in users" value="{{u}}">
+                        {{u}}
+                        </option>
+                        </select>
+                  </div>    
+                  <div class="form-group" ng-show="userSelecionado">
+                        <label for="tipo">Selecione o ID da ficha:</label>
+                        <select class="form-control" id="tipo" ng-model="idselect">
+                        <option ng-repeat="i in fichas" value="{{i}}">
+                        {{i}}
+                        </option>
+                        </select>
+                  </div>                    
+                  <div class="form-group">
+                    <button type="submit" ng-click="consultaResultado()" class="btn btn-primary">Ver Resposta</button>
+                 </div>                               
+                </form>
+                <div ng-repeat="c in categorias" ng-show="buscaCompleta">
+                        <h2>{{c}}</h2>
+                        <div  ng-repeat="p in dados | filter:{categoria:c}:true">
+                            <h3 color="white">Pergunta: {{p.nome}} | Resposta: {{respostas[p.nome]}}</h3>                          
+                          </div>                        
+                </div>                
+              </div>
+           </div>
+        </div>
+    </div>
+                

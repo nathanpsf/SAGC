@@ -1,0 +1,38 @@
+<!-- landing page -->
+<div class="container">
+    <div class="container" id="formOcorrencias">
+        <div class="container">
+            <form class="formCadastrarOcorrencia" ng-submit="enviarOcorrencia()">
+              <h3> CADASTRAR OCORRENCIA </h3>
+              <div class="form-group">
+                <label for="Cidade">Cidade</label>
+                <input type="text" class="form-control" ng-model="ocorrencia.cidade" id="Cidade" placeholder="Informe a cidade">
+              </div>
+              <div class="form-group">
+                  <label for="endereo">Endereço</label>
+                  <input type="text" class="form-control" ng-model="ocorrencia.endereco" id="endereco" placeholder="Informe o endereço">
+              </div>              
+              <div class="form-group">
+                  <label for="numero">Número:</label>
+                  <input type="text" class="form-control" ng-model="ocorrencia.numero" id="numero" placeholder="Informe o Número">
+              </div>                
+              <div class="form-group">
+                <label for="tipo">Qual tipo de ocorrência?</label>
+                <select class="form-control" id="tipo" ng-model="ocorrencia.tipo">
+                  <option>Desastre Natual</option>
+                  <option>Enchente</option>
+                </select>
+              </div>
+              <div class="form-group">
+                  <label for="data">Data de Início(dd/mm/aaa):</label>
+                  <input type="text" class="form-control" id="data" placeholder="dd/mm/aaaa" ng-model="ocorrencia.data">
+              </div>    
+              <div class="form-group">
+                  <label for="obs">Obsservações:</label>
+                  <input type="text" class="form-control" id="obs" placeholder="Observações" ng-model="ocorrencia.obs">
+              </div>    
+              <button type="submit" class="btn btn-light">Enviar</button>
+            </form>
+            </div>
+    </div>
+</div>

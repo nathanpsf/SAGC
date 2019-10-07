@@ -1,0 +1,49 @@
+<div class="container">
+        <div class="container" id="formOcorrencias">
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1>Recuperação de senha</h1>
+                  <form name="eSenhaForm" ng-submit="esqueciSenha()" novalidate ng-hide="mudarSenha">
+                        <div class="form-group row">
+                          <label for="Email" class="col-sm-2 col-form-label">Informe seu E-mail:</label>
+                          <div class="col-sm-10">
+                            <input type="email" tabindex="1" ng-model="esenha.email" class="form-control" id="Email" placeholder="Email" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="Pergunta" class="col-sm-2 col-form-label">Informe a pergunta secreta: </label>
+                          <div class="col-sm-10">
+                            <input type="text" tabindex="2" ng-model="esenha.pergunta" class="form-control" id="Pergunta" placeholder="Pergunta Secreta" required>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Resposta" class="col-sm-2 col-form-label">Informe a resposta secreta: </label>
+                            <div class="col-sm-10">
+                                <input type="text" tabindex="3" ng-model="esenha.resposta" class="form-control" id="Resposta" placeholder="Resposta Secreta" required>
+                            </div>
+                        </div>   
+                        <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <input type="submit" tabindex="4" class="form-control btn btn-primary btn-md" value="Redefinir Senha" ng-disable="eSenhaForm.$invalid">
+                                </div>
+                        </div>                           
+                                             
+                      </form>    
+                      <form name="eSenhaForm2" ng-submit="salvarSenha()" novalidate ng-show="mudarSenha">
+                            <div class="form-group row">
+                              <label for="Senha" class="col-sm-2 col-form-label">Informe a nova Senha:</label>
+                              <div class="col-sm-10">
+                                <input type="password" tabindex="1" ng-model="esenha.nsenha" class="form-control" id="Senha" placeholder="Nova Senha" required>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <input type="submit" tabindex="2" class="form-control btn btn-primary btn-md" value="Confirmar" ng-disable="eSenhaForm2.$invalid">
+                                </div>
+                            </div>                           
+                                                 
+                          </form>                                     
+                </div>
+            </div>
+        </div>
+</div>                

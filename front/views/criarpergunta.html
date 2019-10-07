@@ -1,0 +1,50 @@
+<!-- landing page -->
+<div class="container">
+        <div class="container" id="formOcorrencias">
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1>Tela criação de Perguntas</h1>
+                  <form>
+                        <div class="form-group">
+                            <label for="perguntaNome">Qual nome da Pergunta?</label>
+                            <input type="text" ng-disabled="perguntacriada" ng-model="pergunta.questionText" class="form-control" id="perguntaNome" placeholder="Pergunta">
+                        </div>
+                        <div class="form-group">
+                                <label for="perguntaNome">Qual nome da categoria?</label>
+                                <input type="text" ng-disabled="perguntacriada" ng-model="pergunta.questionCategory" class="form-control" id="perguntaNome" placeholder="Categoria">
+                        </div>
+                        <div class="form-group">
+                                <label for="tipo">Qual tipo da Pergunta?</label>
+                                <select class="form-control" id="tipo" ng-disabled="perguntacriada" ng-model="pergunta.questionType">
+                                  <option value="mult">Múltipla Escolha</option>
+                                  <option value="uni">Escolha Única</option>
+                                  <option value="text">Texto</option>
+                                </select>
+                        </div>    
+                        <div class="form-group">
+                            <button type="submit" ng-click="criarPergunta()" ng-disabled="perguntacriada" class="btn btn-primary">Cadastrar Pergunta</button>
+                        </div>   
+                    </form>
+                    <div ng-show="temResposta">
+                            <p>Respostas já criadas para essa pergunta:</p>
+                            <ul>
+                                <li class="animate-repeat" ng-repeat="r in respostas">
+                                    {{r.texto}}
+                                </li>
+                            </ul>
+                    </div>                    
+                    <form ng-show="temResposta">
+                        <div class="form-group">
+                            <label for="respostaNome">Qual nome da Resposta?</label>
+                            <input type="text" ng-model="resposta.name" class="form-control" id="respostaNome" placeholder="Resposta">
+                        </div>  
+                        <div class="form-group">
+                                <button type="submit" ng-click="criarResposta()" class="btn btn-primary">Cadastrar Resposta</button>
+                            </div>
+                    </form>
+                    <button type="button" class="btn btn-success" ng-click="finalizarPergunta()">Finalizar</button> 
+                    <button type="button" class="btn btn-primary" ng-click="novaPergunta()">Nova Pergunta</button>                          
+              </div>
+          </div>
+        </div>
+</div>

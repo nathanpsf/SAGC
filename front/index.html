@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html ng-app="Sagc">
+	<title>SAGC</title>
+
+<head>
+  <base href="/SAGC/">
+	 <!--  Meta  -->
+  <meta charset="UTF-8" />
+	<title>SAGC</title>
+  
+	 <!--  Styles  -->
+	<link rel="stylesheet" href="styles/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link href="http://cdn.phpoll.com/css/animate.css" rel="stylesheet">
+	<!-- Scripts -->
+  
+    
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/scripts.js"></script>
+  
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/Controllers/UsuarioController.js"></script>  
+  <script src="js/Controllers/HomeController.js"></script>    
+  <script src="js/Controllers/PerguntaController.js"></script>  
+  <script src="js/Controllers/FichaController.js"></script>    
+  <script src="js/Controllers/EnvioFichaController.js"></script>   
+  <script src="js/Controllers/PainelController.js"></script> 
+  <script src="js/Controllers/ResponderFichaController.js"></script>    
+  <script src="js/Controllers/AnaliseReqsController.js"></script>  
+  <script src="js/Controllers/OcorrenciaController.js"></script>    
+  <script src="js/Controllers/CriarOperadorController.js"></script> 
+  
+</head>
+
+<body>
+
+<div ng-controller="UsuarioController">
+<nav ng-hide="logado" class="navbar navbar-inverse navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" id="brandNavbar" href="/SAGC/"> <i class="fa fa-cloud"></i>  SAGC</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registrar <span class="caret"></span></a>
+			<ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+            <div class="col-lg-12">
+              <div class="text-center">
+                <h3><b>Registrar</b></h3></div>
+				
+				<!-- EXEMPLO DE AJAX, NATHAN FORM DE REGISTRO -->
+              <form id="ajax-register-form" name="registroForm" method="post" role="form" autocomplete="off" ng-submit="salvar()" novalidate>
+                <div class="form-group">
+                  <input type="text" ng-model="user.name" name="username" id="RegistroUsername" tabindex="1" class="form-control" placeholder="Usuario" value="" required>
+                </div>
+                <div class="form-group">
+                  <input type="email" ng-model = "user.email" id="RegistroEmail" tabindex="2" class="form-control" placeholder="Email" value="" required>
+                </div>
+				        <div class="form-group">
+                  <input type="text" ng-model = "user.city" id="RegistroCidade" tabindex="3" class="form-control" placeholder="Cidade" value="" required>
+                </div>
+                <div class="form-group">
+                  <input type="password" ng-model = "user.password" name="password" id="RegistroPassword" tabindex="4" class="form-control" placeholder="Senha" required>
+                </div>
+				        <div class="form-group">
+                    <input type="text" ng-model = "user.question" id="RegistroPergunta" tabindex="5" class="form-control" placeholder="Pergunta Secreta" value="" required>
+                </div>
+				        <div class="form-group">
+                    <input type="text" ng-model = "user.answer" id="RegistroResposta" tabindex="6" class="form-control" placeholder="Resposta Secreta" value="" required>
+                </div>                
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3">
+                      <input type="submit" name="register-submit" id="RegistroSubmit" tabindex="4" class="form-control btn btn-info" value="Cadastre-se" ng-disabled="registroForm.$invalid">
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" class="hide" name="token" id="token" value="7c6f19960d63f53fcd05c3e0cbc434c0">
+              </form>
+            </div>
+          </ul>
+        </li>
+		
+		
+        <li class="dropdown">
+          <a href="http://phpoll.com/login" class="dropdown-toggle" data-toggle="dropdown">Log In<span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+            <div class="col-lg-12">
+              <div class="text-center">
+                <h3><b>Log In</b></h3></div>
+			 <!--OUTRO EXEMPLO DE AJAX , FORM DE LOGIN-->
+              <form id="ajax-login-form" ng-submit="logar()" method="post" role="form" autocomplete="off">
+                <div class="form-group">
+                  <label for="username">Usuario</label>
+                  <input type="text" ng-model="user.email" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <label for="password">Senha</label>
+                  <input type="password" ng-model="user.password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-xs-5 pull-right">
+                      <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="text-center">
+                        <a href="/SAGC/esqueciasenha/" tabindex="5" class="forgot-password">Esqueci minha senha</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6">
+              </form>
+            </div>
+          </ul>
+        </li>
+				
+      </ul>
+    </div>
+  </div>
+</nav>
+<nav ng-show="logado" class="navbar navbar-inverse navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" id="brandNavbar" href="/SAGC/"> <i class="fa fa-cloud"></i>  SAGC</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.name}} <span class="caret"></span></a>
+              <ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
+                  <div class="col-lg-12">
+                    <li><a ng-show="operador" href="/SAGC/novapergunta">Criar Perguntas</a></li>
+                    <li><a ng-show="operador" href="/SAGC/novaficha">Criar Ficha</a></li>
+                    <li><a ng-show="operador" href="/SAGC/enviarficha">Enviar Ficha</a></li>
+                    <li><a ng-show="operador" href="/SAGC/analisarreqs">Analisar Requisições de Ficha</li>
+                    <li><a ng-show="operador" href="/SAGC/criaroperador">Ajustar Usuário como Operador</li>                      
+                    <li><a href="/SAGC/painel">Painel</a></li>
+                    <li><a href="#" ng-click="deslogar()">Logout</a></li>
+                  </div>
+              </ul>          
+            </li>
+      </ul>
+      </div>
+    </div>
+</nav>
+</div>
+<div ng-view></div>
+</div>
+</body>
+  
+  
+  
+  
+ <!-- Footer -->
+<footer id="footer">
+  
+  <h2 class="textoFoot"><i class="fa fa-user icon"></i> UFABC</h2>
+  <h2 class="textoFoot">&copy; Sistema Avançado de Gerenciamento Climático 2019</h2>
+</footer>
+<!-- Footer -->
+</html>
