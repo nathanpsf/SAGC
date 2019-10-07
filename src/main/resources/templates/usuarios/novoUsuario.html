@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Detalhes novo usuário</title>
+</head>
+<body>
+<h1 th:text="${nome}"></h1>
+<span th:if="${operador}">É operador.</span>
+<span th:unless="${operador}">Não é operador</span>
+<br/><br/>
+</body>
+</html>

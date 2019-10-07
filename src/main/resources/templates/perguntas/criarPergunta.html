@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tela de criação de Pergunta</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<p>Tela de criação de perguntas</p>
+
+<form id = "catForm">
+<label for="nper">Nome Pergunta:</label>
+<input type="text" id="nper" name="catnome" >
+<br/>
+<label for="ncat">Nome Categoria:</label>
+<input type="text" id="ncat" name="catnome" >
+<br/>
+<label for="alternativas">Qual tipo da pergunta?</label>
+<select id="alternativas" name="nalts">
+	<option value="mult">Múltipla escolha</option>
+	<option value="uni">Escolha única</option>
+</select>
+<button type="submit" id="bth-cad">Cadastrar</button>
+</form>
+<div id="respostas">
+	<p>Respostas já criadas para essa pergunta:</p>
+	<ul id="listaRespostas">
+		
+	</ul>
+</div>
+<div id="novaResposta">
+	<form id='respForm'> 
+	<br/> 
+	<label for='rNome'>Qual nome da Resposta?</label> 
+	<input type='text' id='rNome'/> 
+	<button type='submit' id='bth-resp'>Incluir	</button> 
+	</form>
+</div>
+
+<a href="http://localhost:8080/usuarios/telaLogado.html">Finalizar</a>
+<script type="text/javascript">
+
+var qtResp = 0;
+var respNomes = [];
+var qNome;
+var qCate;
+$(document).ready(function () {
+	$("#respostas").hide();
+	$("#novaResposta").hide();
+	/// Criar Pergunta
+	$("#catForm").submit(function(event){
+		event.preventDefault();
+		criarPergunta();
+	});
+	
+	
+	//Adicionar Resposta
+	$(document).on('submit','#respForm',function(event){
+		event.preventDefault();
+		criarResposta();
+	});
+});
+function verificarResp()
+{
+	if(qtResp >= 1)
+	{
+		$("#respostas").show();
+		$("#listaRespostas").append("<li> "+ respNomes[qtResp-1] + "</li>");
+	}
+}
+function criarResposta()
+{
+		var nome = $("#rNome").val();
+		$.ajax({
+		url : 'http://localhost:8080/respostas/novaResposta',
+		type : 'POST',
+		dataType: 'json',
+		data : {
+			name: nome,
+			qname: qNome,
+			qcat: qCate,
+		},
+        success: function (data) {
+        	alert('Resposta Criada com sucesso!\nAgora adicione Respostas!');
+        	qtResp++;
+        	respNomes.push(nome);
+            verificarResp();
+        	
+        },
+        error: function (e) {
+        	console.log("Error "+ e);
+        }
+	});
+}
+
+function criarPergunta()
+{
+		var nome = $("#nper").val();
+		var cate = $("#ncat").val();
+		var tipo = $("#alternativas").val();
+		
+		qNome = nome;
+		qCate = cate;
+		$.ajax({
+		url : 'http://localhost:8080/perguntas/novaPergunta',
+		type : 'POST',
+		dataType: 'json',
+		data : {
+			name: nome,
+			cat: cate,
+			type: tipo,
+		},
+        success: function (data) {
+        	alert('Pergunta Criada com sucesso!\nAgora adicione Respostas!');
+            $("#novaResposta").show();
+            $("#bth-cad").attr("disabled", true);
+            $("#alternativas").attr("disabled", true);
+            $("#nper").attr("disabled", true);
+            $("#ncat").attr("disabled", true);
+        },
+        error: function (e) {
+        	console.log("Error "+ e);
+        }
+	});
+}
+
+</script>
+</body>
+</html>

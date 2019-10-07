@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tela de edição de pergunta</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<form>
+<label for="categorias">Selecione uma categoria:</label>
+<select id="categorias" name="ncats">
+	<option value="zero">Selecione uma Categoria</option>
+	<option th:each="p : ${perguntas}" th:text="${p.questionCategory}" th:value="${p.questionCategory}"></option>
+</select>
+<div id ="Perguntas">
+<br/>
+	<label for="perguntas">Selecione uma pergunta:</label>
+	<select id="perguntas" name="npers">
+	<option value="zero">Selecione uma Pergunta</option>
+	</select>
+</div>
+</form>
+<hr>
+<div id ="Edicao">
+	<form id="editForm">
+		<label for="newPer">Novo nome da Pergunta:</label>
+		<input type="text" id="newPer">
+		<br/>
+		<label for="newCat">Nova categoria da Pergunta:</label>
+		<input type="text" id="newCat">
+		<br/>
+		<ul id="respList">
+		
+		</ul>
+		<br/>
+		<label for='rNome'>Qual nome da nova Resposta?</label> 
+		<input type='text' id='rNome'/> 
+		<button id='bth-resp' type="button">Incluir</button> 
+	</form>
+</div>
+<script type="text/javascript">
+var id, id2, novaResposta;
+$(document).ready(function () {
+	$("#Perguntas").hide();
+	$("#Edicao").hide();
+	$("#categorias").change(function(){
+	   // Aqui você tem o value selecionado assim que o usuário muda o option
+	   id = $(this).val();
+	   if(id != 'zero') {
+		   buscaCategoria();
+	   }
+	   
+	});
+	$(document).on('change', '#perguntas', function(){
+		id2 = $(this).val();
+		if(id2 != 'zero') {
+			buscaPergunta();
+		}
+	});
+	$(document).on('click', '#bth-resp', function(e){
+		novaResposta = $("#rNome").val();
+		e.preventDefault();
+		if(novaResposta == null || novaResposta == '')
+		{
+			alert("Campo de nova Resposta Vazio");
+		}
+		else
+		{
+			criarResposta();
+		}
+	});
+});
+function criarResposta()
+{
+		$.ajax({
+		url : 'http://localhost:8080/respostas/novaResposta',
+		type : 'POST',
+		dataType: 'json',
+		data : {
+			name: novaResposta,
+			qname: id2,
+			qcat: id,
+		},
+        success: function (data) {
+        	alert('Resposta Criada com sucesso!');
+        	$("#respList").append("<li>" + data.name + " <a href='#'>Remover</a></li>");
+        },
+        error: function (e) {
+        	console.log("Error "+ e);
+        }
+	});
+}
+function buscaPergunta()
+{
+		$.ajax({
+		url : 'http://localhost:8080/perguntas/consultaPergunta',
+		type : 'POST',
+		dataType: 'json',
+		data : {
+			catName: id,
+			perName: id2,
+		},
+        success: function (data) {
+        	$("#Edicao").show();
+        	$("#respList").append("<li>" + data.name + " <a href='#'>Remover</a></li>");
+        		$.map(data, function(item){
+        		$("#respList").append("<li>" + item.name + " <a href='#'>Remover</a></li>");
+        	});
+        	
+        },
+        error: function (e) {
+        	console.log("Error "+ e);
+        }
+	});
+}
+function buscaCategoria()
+{
+		$.ajax({
+		url : 'http://localhost:8080/perguntas/consultaCategoria',
+		type : 'POST',
+		dataType: 'json',
+		data : {
+			catName: id,
+		},
+        success: function (data) {
+        	$("#Perguntas").show();
+        		$.map(data, function(item){
+        		$("#perguntas").append("<option value='"+item.nome+"'>"+item.nome+"</option>");
+        	});
+        	
+        },
+        error: function (e) {
+        	console.log("Error "+ e);
+        }
+	});
+}
+</script>
+</body>
+</html>

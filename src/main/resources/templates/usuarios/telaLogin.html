@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tela de Login</title>
+</head>
+<body>
+<form action="#" th:action="@{/validarlogin}" th:object="${usuario}" method="post">
+    <table border="1">
+        <tr>
+            <td><label/>Nome do Usuário</label></td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td><label>Senha</label></td>
+            <td><input type="password" th:field="*{password}" /></td>
+        </tr>             
+        <tr>
+            <td><input type="submit" value="Logar" /></td>
+        </tr>
+        
+    </table>
+    <p th:text="${mensagemerro}"></p>
+</form>
+</body>
+</html>

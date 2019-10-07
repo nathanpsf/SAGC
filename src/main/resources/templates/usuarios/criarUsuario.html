@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tela de criação de Usuario</title>
+</head>
+<body>
+<form action="#" th:action="@{/salvarusuario}" th:object="${usuario}" method="post">
+    <table border="1">
+        <tr>
+            <td><label/>Nome do Usuário</label></td>
+            <td><input type="text" th:field="*{name}" /></td>
+        </tr>
+        <tr>
+            <td><label>Senha</label></td>
+            <td><input type="password" th:field="*{password}" /></td>
+        </tr>           
+        <tr>
+        	<td>É operador?</td>
+        	<td><input type="radio" id="verdadeiro" name="operador" value="1" th:field="*{operator}"checked>
+  			<label for="verdadeiro">Sim</label><br>
+  			  <input type="radio" id="falso" name="operador" th:field="*{operator}" value="0">
+  			<label for="falso">Não</label></td>
+        </tr>    
+        <tr>
+            <td><input type="submit" value="Cadastrar" /></td>
+        </tr>
+        
+    </table>
+</form>
+</body>
+</html>
